@@ -25,5 +25,4 @@ shove.setWindowMode(conf.wW,conf.wH,{resizable=true,vsync=conf.vsync})
 
 lg.setLineStyle("rough")
 
-local sceneryInit=require("lib/scenery")
-scenery=sceneryInit()
+

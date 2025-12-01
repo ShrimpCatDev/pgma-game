@@ -1,6 +1,9 @@
 require("init")
 
 function love.load()
+    lg=love.graphics
+    local sceneryInit=require("lib/scenery")
+    scenery=sceneryInit("level","scenes")
     scenery:hook(love)
     font = require("assets/font/skull")
     lg.setFont(font)
@@ -12,7 +15,5 @@ function love.update(dt)
 end 
 
 function love.draw()
-    beginDraw()
-        lg.print("hello world awa")
-    endDraw()
+    
 end
