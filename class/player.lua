@@ -10,6 +10,8 @@ function player:new(x, y)
     
 end
 
+
+
 function player:update(dt)
     part.update(dt)
 

@@ -12,7 +12,20 @@ function entity:new(x, y, w, h)
     self.gravM = 1 -- gravity multiplier for entitys which have different weights
 
     world:add(self, self.x, self.y, self.w, self.h)
+
+    self.filter=function(item,other)
+        if other.properties.jumpthru and other.properties.platform then
+            if other.y>=item.y+item.h and item.vy>=0 then
+                return "slide"
+            else
+                return nil
+            end
+        else
+            return "slide"
+        end
+    end
 end
+
 
 function entity:update(dt)
     self.vy = self.vy + world.gravity * self.gravM * dt
@@ -20,7 +33,7 @@ function entity:update(dt)
     local terminalYVel = 500
     if self.vy > terminalYVel then self.vy = terminalYVel end
 
-    local ax, ay, col, len = world:move(self, self.x + self.vx * dt, self.y + self.vy * dt)
+    local ax, ay, col, len = world:move(self, self.x + self.vx * dt, self.y + self.vy * dt,self.filter)
     self.x, self.y = ax, ay
 
     self.col = col
