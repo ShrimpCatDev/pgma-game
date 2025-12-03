@@ -1,32 +1,31 @@
-local entity=object:extend()
+local entity = object:extend()
 
-function entity:new(x,y,w,h)
-    self.x=x or 0 --x yes
-    self.y=y or 0 --y yes
-    self.w=w or 16 --idk why i chose 16
-    self.h=h or 16
+function entity:new(x, y, w, h)
+    self.x = x or 0 --x yes
+    self.y = y or 0 --y yes
+    self.w = w or 16 --idk why i chose 16
+    self.h = h or 16
 
-    self.vx=0
-    self.vy=0
+    self.vx = 0
+    self.vy = 0
 
-    self.gravM=1 -- gravity multiplier for entitys which have different weights
+    self.gravM = 1 -- gravity multiplier for entitys which have different weights
 
-    world:add(self,self.x,self.y,self.w,self.h)
+    world:add(self, self.x, self.y, self.w, self.h)
 end
 
-
 function entity:update(dt)
-    self.vy=self.vy+world.gravity*dt
-    
-    local ax,ay,col,len=world:move(self,self.x+self.vx*dt,self.y+self.vy*dt)
-    self.x,self.y=ax,ay
+    self.vy = self.vy + world.gravity * dt
 
-    self.col=col
-    self.len=len
+    local ax, ay, col, len = world:move(self, self.x + self.vx * dt, self.y + self.vy * dt)
+    self.x, self.y = ax, ay
+
+    self.col = col
+    self.len = len
 end
 
 function entity:draw()
-    lg.rectangle("fill",self.x,self.y,self.w,self.h)
+    lg.rectangle("fill", self.x, self.y, self.w, self.h)
 end
 
 return entity
