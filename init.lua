@@ -25,5 +25,7 @@ shove.setWindowMode(conf.wW,conf.wH,{resizable=true,vsync=conf.vsync})
 
 lg.setLineStyle("rough")
 
+part=require("lib.particles")
+
 bump=require("lib/bump")
 object=require("lib/classic")
