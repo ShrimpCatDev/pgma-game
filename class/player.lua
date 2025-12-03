@@ -5,13 +5,13 @@ function player:new(x, y)
     player.super.new(self, x, y, 16, 16)
 
     -- Player Specific
-    self.maxSpeed = 120
+    self.maxSpeed = 70
     self.jump = false
 end
 
 function player:update(dt)
-    local acceleration = 600
-    local friction = 800
+    local acceleration = 1000
+    local friction = 2000
 
     self.jump = false
 
@@ -20,10 +20,10 @@ function player:update(dt)
     elseif input:down("right") then
         self.vx = self.vx + acceleration * dt
     else
-        if self.vx > friction then
+        if self.vx > 0 then
             self.vx = self.vx - friction * dt
             if self.vx < 0 then self.vx = 0 end
-        elseif self.vx < -friction then
+        elseif self.vx < 0 then
             self.vx = self.vx + friction * dt
             if self.vx > 0 then self.vx = 0 end
         end
