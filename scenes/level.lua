@@ -10,7 +10,7 @@ function lvl:load()
     
     print("loaded!")
 
-    local p=require("class/entity")
+    local p=require("class/player")
     pl=p()
 end
 
