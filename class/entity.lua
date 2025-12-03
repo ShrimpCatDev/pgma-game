@@ -15,7 +15,10 @@ function entity:new(x, y, w, h)
 end
 
 function entity:update(dt)
-    self.vy = self.vy + world.gravity * dt
+    self.vy = self.vy + world.gravity * self.gravM * dt
+
+    local terminalYVel = 500
+    if self.vy > terminalYVel then self.vy = terminalYVel end
 
     local ax, ay, col, len = world:move(self, self.x + self.vx * dt, self.y + self.vy * dt)
     self.x, self.y = ax, ay

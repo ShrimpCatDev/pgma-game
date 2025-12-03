@@ -40,12 +40,16 @@ function player:update(dt)
         local col = self.col[i]
         if col.other.properties.platform and col.normal.y == -1 then
             self.jump = true
-            self.vy = 0
+            if math.abs(self.vy) < 50 then
+                self.vy = 0
+            else
+                self.vy = self.vy * 0.1
+            end
         end
     end
 
     if input:pressed("jump") and self.jump then
-        self.vy = -120
+        self.vy = -250
     end
 end
 

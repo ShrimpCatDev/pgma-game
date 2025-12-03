@@ -2,7 +2,7 @@ local lvl={}
 
 function lvl:load()
     world=bump.newWorld()
-    world.gravity=240
+    world.gravity=900
 
     map=sti("assets/tilemap/theLevel.lua",{"bump"})
     map:bump_init(world)
