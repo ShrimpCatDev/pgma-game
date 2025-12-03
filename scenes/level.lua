@@ -11,7 +11,7 @@ function lvl:load()
     print("loaded!")
 
     local p = require("class/player")
-    player = p()
+    player = p(20, 70)
 end
 
 function lvl:update(dt)

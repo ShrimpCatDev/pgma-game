@@ -7,6 +7,7 @@ function player:new(x, y)
     -- Player Specific
     self.maxSpeed = 70
     self.jump = false
+    
 end
 
 function player:update(dt)
@@ -32,6 +33,10 @@ function player:update(dt)
         end
     end
 
+    if input:pressed("gravity") then
+        self.gravM = -self.gravM
+    end
+
     local max = self.maxSpeed
     if self.vx > max then self.vx = max end
     if self.vx < -max then self.vx = -max end
@@ -41,7 +46,7 @@ function player:update(dt)
 
     for i = 1, self.len do
         local col = self.col[i]
-        if col.other.properties.platform and col.normal.y == -1 then
+        if col.other.properties.platform and col.normal.y == -self.gravM  then
             if math.abs(self.vy) < 50 then
                 self.vy = 0
                 self.jump = true

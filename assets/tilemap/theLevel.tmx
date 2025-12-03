@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="10" height="9" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="5">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="10" height="9" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="6">
  <editorsettings>
   <export target="theLevel.lua" format="lua"/>
  </editorsettings>
@@ -72,6 +72,11 @@
    </properties>
   </object>
   <object id="4" x="0" y="0" width="112" height="32">
+   <properties>
+    <property name="platform" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="5" x="112" y="0" width="48" height="4">
    <properties>
     <property name="platform" type="bool" value="true"/>
    </properties>

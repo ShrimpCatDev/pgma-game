@@ -15,7 +15,9 @@ conf.input={
     controls={
         left={"key:left", "key:a"},
         right={"key:right", "key:d"},
-        jump={"key:z", "key:up", "key:space"}
+        jump={"key:z", "key:up", "key:space"},
+        gravity={"key:e"}, -- For testing
+        
     },
     pairs={
 
