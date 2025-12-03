@@ -10,7 +10,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 5,
-  nextobjectid = 4,
+  nextobjectid = 5,
   properties = {},
   tilesets = {
     {
@@ -129,8 +129,8 @@ return {
       properties = {},
       encoding = "lua",
       data = {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        35, 35, 35, 35, 35, 35, 35, 0, 0, 0,
+        51, 51, 51, 51, 51, 51, 51, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 20, 20,
         0, 0, 0, 0, 0, 0, 0, 0, 20, 20,
@@ -208,6 +208,21 @@ return {
           x = 128,
           y = 48,
           width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["platform"] = true
+          }
+        },
+        {
+          id = 4,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 0,
+          y = 0,
+          width = 112,
           height = 32,
           rotation = 0,
           visible = true,

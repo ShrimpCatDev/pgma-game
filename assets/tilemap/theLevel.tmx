@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="10" height="9" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="4">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="10" height="9" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="5">
  <editorsettings>
   <export target="theLevel.lua" format="lua"/>
  </editorsettings>
@@ -33,8 +33,8 @@
  </layer>
  <layer id="1" name="terrain" width="10" height="9">
   <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
+35,35,35,35,35,35,35,0,0,0,
+51,51,51,51,51,51,51,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,20,20,
 0,0,0,0,0,0,0,0,20,20,
@@ -57,7 +57,7 @@
 65,65,65,65,65,65,65,65,65,65
 </data>
  </layer>
- <objectgroup id="4" name="collision">
+ <objectgroup color="#ee3134" id="4" name="collision">
   <properties>
    <property name="collidable" type="bool" value="true"/>
   </properties>
@@ -67,6 +67,11 @@
    </properties>
   </object>
   <object id="3" x="128" y="48" width="32" height="32">
+   <properties>
+    <property name="platform" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="4" x="0" y="0" width="112" height="32">
    <properties>
     <property name="platform" type="bool" value="true"/>
    </properties>
