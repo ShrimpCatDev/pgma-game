@@ -10,19 +10,19 @@ function lvl:load()
     
     print("loaded!")
 
-    local p=require("class/player")
-    pl=p()
+    local p = require("class/player")
+    player = p()
 end
 
 function lvl:update(dt)
     map:update(dt)
-    pl:update(dt)
+    player:update(dt)
 end
 
 function lvl:draw()
     beginDraw()
         map:draw()
-        pl:draw()
+        player:draw()
     endDraw()
 end
 
