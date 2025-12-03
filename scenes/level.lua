@@ -10,6 +10,8 @@ function lvl:load()
     
     print("loaded!")
 
+    camera={x=0,y=0}
+
     local p = require("class/player")
     player = p(20, 70)
 end
@@ -17,12 +19,18 @@ end
 function lvl:update(dt)
     map:update(dt)
     player:update(dt)
+    camera.x=(player.x+player.w/2)-conf.gW/2
+    camera.y=(player.y+player.h/2)-conf.gH/2
 end
 
 function lvl:draw()
     beginDraw()
-        map:draw()
-        player:draw()
+        lg.push()
+            lg.translate(-camera.x,-camera.y)
+                map:draw(-camera.x,-camera.y)
+                player:draw()
+            lg.translate(0,0)
+        lg.pop()
     endDraw()
 end
 
