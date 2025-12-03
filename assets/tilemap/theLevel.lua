@@ -115,7 +115,7 @@ return {
       id = 3,
       name = "bg",
       class = "",
-      visible = true,
+      visible = false,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
