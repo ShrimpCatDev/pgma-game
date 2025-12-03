@@ -48,8 +48,9 @@ function player:update(dt)
             else
                 self.vy = self.vy * 0.1
             end
-            if not self.jump then
-                self:spawnShockwave(self.x, self.y)
+            local velocityHeight = 20 -- Change to 30
+            if not self.jump and self.vy > velocityHeight then
+                self:spawnShockwave(self.x + self.w / 2, self.y + self.h)
             end
         end
     end
@@ -60,38 +61,42 @@ function player:update(dt)
 end
 
 function player:draw()
-    part.draw()
     lg.setColor(0.5, 0.5, 1)
     player.super.draw(self)
     lg.setColor(1, 1, 1, 1)
+    part.draw()
 end
 
 function player:spawnShockwave(x, y)
-    local amt = 20
+    local amt = 40
     local function drawDust(x, y, life, data)
         local t = math.max(life, 0)
         local a = t * 2.5
         local r = data.size * t
-        lg.setColor(0.8, 0.8, 0.8, a)
+        lg.setColor(1,1,1, a)
         lg.circle("fill", x, y, r)
     end
+    local baseX = x
+    local baseY = y
+    local half = amt / 2
     for i = 1, amt do
-        local ang = (i / amt) * math.pi / 2
-        local speed = 80 + math.random() * 40
-        local size = 6 + math.random() * 4
+        local offset = i - half
+        x = baseX + offset * 0.5
+        y = baseY - math.random(-2, 2)
 
-        local vx = math.cos(ang) * speed
-        local vy = math.cos(ang) * speed
+        local size = 2
+        local angle = math.rad(love.math.random(0, 180))
+        local vx = math.sin(angle)
+        local vy = -20 + math.cos(angle)
 
         part.new(
             x, y,
             vx, vy,
             -vx * 1.5, -vy * 1.5,
-            0.4,
+            0.2 + love.math.random(0.1, 0.3),
             drawDust,
             nil,
             { size = size }
-
         )
     end
 end
