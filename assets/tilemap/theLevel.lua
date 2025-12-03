@@ -10,7 +10,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 5,
-  nextobjectid = 2,
+  nextobjectid = 4,
   properties = {},
   tilesets = {
     {
@@ -132,8 +132,8 @@ return {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 20, 20,
+        0, 0, 0, 0, 0, 0, 0, 0, 20, 20,
         1, 3, 2, 3, 3, 4, 3, 4, 4, 5,
         17, 19, 19, 18, 20, 18, 18, 18, 18, 21,
         33, 36, 34, 35, 35, 36, 36, 35, 34, 37,
@@ -196,7 +196,24 @@ return {
           height = 64,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["platform"] = true
+          }
+        },
+        {
+          id = 3,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 128,
+          y = 48,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["platform"] = true
+          }
         }
       }
     }

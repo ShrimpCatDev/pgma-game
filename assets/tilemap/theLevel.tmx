@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="10" height="9" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="2">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="10" height="9" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="4">
  <editorsettings>
-  <export format="lua"/>
+  <export target="theLevel.lua" format="lua"/>
  </editorsettings>
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="256" columns="16">
   <image source="tileset.png" width="256" height="256"/>
@@ -36,8 +36,8 @@
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,20,20,
+0,0,0,0,0,0,0,0,20,20,
 1,3,2,3,3,4,3,4,4,5,
 17,19,19,18,20,18,18,18,18,21,
 33,36,34,35,35,36,36,35,34,37,
@@ -61,6 +61,15 @@
   <properties>
    <property name="collidable" type="bool" value="true"/>
   </properties>
-  <object id="1" x="0" y="80" width="160" height="64"/>
+  <object id="1" x="0" y="80" width="160" height="64">
+   <properties>
+    <property name="platform" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="3" x="128" y="48" width="32" height="32">
+   <properties>
+    <property name="platform" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

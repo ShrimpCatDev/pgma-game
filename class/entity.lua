@@ -17,9 +17,12 @@ end
 
 function entity:update(dt)
     self.vy=self.vy+world.gravity*dt
-
+    
     local ax,ay,col,len=world:move(self,self.x+self.vx*dt,self.y+self.vy*dt)
     self.x,self.y=ax,ay
+
+    self.col=col
+    self.len=len
 end
 
 function entity:draw()
