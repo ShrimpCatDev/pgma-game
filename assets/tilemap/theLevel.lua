@@ -9,8 +9,8 @@ return {
   height = 9,
   tilewidth = 16,
   tileheight = 16,
-  nextlayerid = 4,
-  nextobjectid = 1,
+  nextlayerid = 5,
+  nextobjectid = 2,
   properties = {},
   tilesets = {
     {
@@ -88,7 +88,7 @@ return {
       y = 0,
       width = 10,
       height = 9,
-      id = 2,
+      id = 3,
       name = "bg",
       class = "",
       visible = true,
@@ -118,7 +118,7 @@ return {
       width = 10,
       height = 9,
       id = 1,
-      name = "Tile Layer 1",
+      name = "terrain",
       class = "",
       visible = true,
       opacity = 1,
@@ -133,11 +133,11 @@ return {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 22, 0, 0, 0, 0, 0, 0,
-        1, 2, 3, 3, 4, 2, 4, 4, 2, 5,
-        17, 20, 20, 19, 19, 20, 18, 18, 19, 21,
-        33, 34, 36, 34, 35, 36, 35, 36, 34, 37,
-        49, 52, 50, 50, 52, 52, 50, 50, 50, 53
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        1, 3, 2, 3, 3, 4, 3, 4, 4, 5,
+        17, 19, 19, 18, 20, 18, 18, 18, 18, 21,
+        33, 36, 34, 35, 35, 36, 36, 35, 34, 37,
+        49, 51, 50, 51, 51, 50, 50, 51, 51, 53
       }
     },
     {
@@ -146,7 +146,7 @@ return {
       y = 0,
       width = 10,
       height = 9,
-      id = 3,
+      id = 2,
       name = "deco",
       class = "",
       visible = true,
@@ -167,6 +167,37 @@ return {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         65, 65, 65, 65, 65, 65, 65, 65, 65, 65
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 4,
+      name = "collision",
+      class = "",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {
+        ["collidable"] = true
+      },
+      objects = {
+        {
+          id = 1,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 0,
+          y = 80,
+          width = 160,
+          height = 64,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
       }
     }
   }
