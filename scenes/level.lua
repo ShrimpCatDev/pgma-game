@@ -21,6 +21,9 @@ function lvl:update(dt)
     player:update(dt)
     camera.x=(player.x+player.w/2)-conf.gW/2
     camera.y=(player.y+player.h/2)-conf.gH/2
+
+    camera.x=clamp(camera.x,0,map.width*map.tilewidth-conf.gW)
+    camera.x=clamp(camera.y,0,map.height*map.tileheight-conf.gH)
 end
 
 function lvl:draw()
