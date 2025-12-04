@@ -6,8 +6,11 @@ function player:new(x, y)
 
     -- Player Specific
     self.maxSpeed = 70
-    self.jumps = 1
+
+    self.maxJumps = 3
+    self.jumps = self.maxJumps
     self.doubleJump = false
+    self.isGrounded = false
     
 end
 
@@ -15,6 +18,7 @@ end
 
 function player:update(dt)
     part.update(dt)
+    self.isGrounded = false
 
 
     local acceleration = 1000
@@ -54,22 +58,26 @@ function player:update(dt)
         if col.other.properties.platform and col.normal.y == -self.gravM  then
             if math.abs(self.vy) < 50 then
                 self.vy = 0
-                self.jumps = self.doubleJump and 2 or 1
+                self.isGrounded = true
+                self.jumps = self.doubleJump and self.maxJumps or 1
             else
                 self.vy = self.vy * 0.1
             end
             local velocityHeight = 20 -- Change to 30
             if not self.jump and self.vy > velocityHeight then
-                self:spawnShockwave(self.x + self.w / 2, self.y + self.h)
+                self:spawnShockwave(self.x + self.w / 2, self.y + self.h, true)
             end
         end
     end
 
     if input:pressed("jump") and self.jumps > 0 then
         self.vy = -250 * self.gravM
+        if not self.isGrounded then
+            self:spawnShockwave(self.x + self.w / 2, self.y + self.h, false)
+        end
         self.jumps = self.jumps - 1
     end
-    print(self.vx, self.vy)
+    print(self.isGrounded)
 end
 
 function player:draw()
@@ -79,8 +87,9 @@ function player:draw()
     part.draw()
 end
 
-function player:spawnShockwave(x, y)
-    local amt = 35 * self.vy/20
+function player:spawnShockwave(x, y, vDep)
+    local amt = 35 * (vDep and self.vy/20 or 1)
+    -- @param vDep - Velocity Dependent
     local function drawDust(x, y, life, data)
         local t = math.max(life, 0)
         local a = t * 2.5
