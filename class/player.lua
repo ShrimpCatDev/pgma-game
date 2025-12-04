@@ -6,7 +6,8 @@ function player:new(x, y)
 
     -- Player Specific
     self.maxSpeed = 70
-    self.jump = false
+    self.jumps = 1
+    self.doubleJump = false
     
 end
 
@@ -18,8 +19,6 @@ function player:update(dt)
 
     local acceleration = 1000
     local friction = 2000
-
-    self.jump = false
 
     if input:down("left") then
         self.vx = self.vx - acceleration * dt
@@ -39,6 +38,10 @@ function player:update(dt)
         self.gravM = -self.gravM
     end
 
+    if input:pressed("djump") then
+        self.doubleJump = not self.doubleJump
+    end
+
     local max = self.maxSpeed
     if self.vx > max then self.vx = max end
     if self.vx < -max then self.vx = -max end
@@ -51,7 +54,7 @@ function player:update(dt)
         if col.other.properties.platform and col.normal.y == -self.gravM  then
             if math.abs(self.vy) < 50 then
                 self.vy = 0
-                self.jump = true
+                self.jumps = self.doubleJump and 2 or 1
             else
                 self.vy = self.vy * 0.1
             end
@@ -62,8 +65,9 @@ function player:update(dt)
         end
     end
 
-    if input:pressed("jump") and self.jump then
+    if input:pressed("jump") and self.jumps > 0 then
         self.vy = -250 * self.gravM
+        self.jumps = self.jumps - 1
     end
     print(self.vx, self.vy)
 end
