@@ -65,6 +65,7 @@ function player:update(dt)
     if input:pressed("jump") and self.jump then
         self.vy = -250 * self.gravM
     end
+    print(self.vx, self.vy)
 end
 
 function player:draw()
@@ -75,7 +76,7 @@ function player:draw()
 end
 
 function player:spawnShockwave(x, y)
-    local amt = 40
+    local amt = 35 * self.vy/20
     local function drawDust(x, y, life, data)
         local t = math.max(life, 0)
         local a = t * 2.5
