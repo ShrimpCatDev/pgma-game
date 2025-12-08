@@ -29,3 +29,4 @@ part=require("lib.particles")
 
 bump=require("lib/bump")
 object=require("lib/classic")
+anim8=require("lib/anim8")

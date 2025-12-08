@@ -2,7 +2,7 @@ local entity = require("class/entity")
 local player = entity:extend()
 
 function player:new(x, y)
-    player.super.new(self, x, y, 16, 16)
+    player.super.new(self, x, y, 12, 16)
 
     -- Player Specific
     self.maxSpeed = 70
@@ -12,6 +12,13 @@ function player:new(x, y)
     self.doubleJump = false
     self.isGrounded = false
     
+    self.sheet=lg.newImage("assets/sprite/player.png")
+    local g=anim8.newGrid(16,16,self.sheet:getWidth(),self.sheet:getHeight())
+    self.anim={
+        run=anim8.newAnimation(g('1-12',1),0.05)
+    }
+    self.anim.current=self.anim.run
+    self.direction=1
 end
 
 
@@ -26,8 +33,10 @@ function player:update(dt)
 
     if input:down("left") then
         self.vx = self.vx - acceleration * dt
+        self.direction=-1
     elseif input:down("right") then
         self.vx = self.vx + acceleration * dt
+        self.direction=1
     else
         if self.vx > 0 then
             self.vx = self.vx - friction * dt
@@ -78,12 +87,14 @@ function player:update(dt)
         self.jumps = self.jumps - 1
     end
     print(self.isGrounded)
+    self.anim.current:update(dt)
 end
 
 function player:draw()
-    lg.setColor(0.5, 0.5, 1)
+    lg.setColor(0.5, 0.5, 1,0.5)
     player.super.draw(self)
     lg.setColor(1, 1, 1, 1)
+    self.anim.current:draw(self.sheet,math.ceil(self.x+6),math.ceil(self.y+8),0,self.direction,1,8,8)
     part.draw()
 end
 
