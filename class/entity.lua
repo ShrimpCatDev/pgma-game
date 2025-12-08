@@ -45,7 +45,7 @@ function entity:update(dt)
 end
 
 function entity:draw()
-    lg.rectangle("fill", self.x, self.y, self.w, self.h)
+    lg.rectangle("fill", math.floor(self.x), math.floor(self.y), self.w, self.h)
 end
 
 return entity
