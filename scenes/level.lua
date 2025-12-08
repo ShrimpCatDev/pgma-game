@@ -14,7 +14,10 @@ function lvl:load()
     CloudShader = lg.newShader("shaders/cloud.glsl")
 
     local p = require("class/player")
+    local b = require("class/bot")
     player = p(20, 70)
+    bot = b(100, 70)
+
     TIME = 0
 end
 
@@ -22,6 +25,7 @@ function lvl:update(dt)
     TIME = TIME + dt
     map:update(dt)
     player:update(dt)
+    bot:update(dt)
     camera.x = (player.x + player.w / 2) - conf.gW / 2
     camera.y = (player.y + player.h / 2) - conf.gH / 2
 
@@ -45,6 +49,7 @@ function lvl:draw()
         lg.push()
             lg.translate(-camera.x, -camera.y)
             map:draw(-camera.x, -camera.y)
+            bot:draw()
             player:draw()
             lg.setColor(1,1,1)
             lg.print("double jump: "..tostring(player.doubleJump).."\ninverted grav: "..player.gravM, player.x - 40, player.y - 40)

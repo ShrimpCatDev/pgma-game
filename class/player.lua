@@ -55,7 +55,7 @@ function player:update(dt)
 
     for i = 1, self.len do
         local col = self.col[i]
-        if col.other.properties.platform and col.normal.y == -self.gravM  then
+        if col.other.properties and col.other.properties.platform and col.normal.y == -self.gravM  then
             if math.abs(self.vy) < 50 then
                 self.vy = 0
                 self.isGrounded = true

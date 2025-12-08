@@ -14,7 +14,11 @@ function entity:new(x, y, w, h)
     world:add(self, self.x, self.y, self.w, self.h)
 
     self.filter=function(item,other)
-        if other.properties.jumpthru and other.properties.platform then
+        local p = other.properties
+        if not p then
+            return "slide"
+        end
+        if p.jumpthru and p.platform then
             if other.y>=item.y+item.h and item.vy>=0 then
                 return "slide"
             else
