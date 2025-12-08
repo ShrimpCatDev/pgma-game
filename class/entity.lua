@@ -16,7 +16,7 @@ function entity:new(x, y, w, h)
     self.filter=function(item,other)
         local p = other.properties
         if not p then
-            return "slide"
+            return "cross"
         end
         if p.jumpthru and p.platform then
             if other.y>=item.y+item.h and item.vy>=0 then
@@ -45,7 +45,7 @@ function entity:update(dt)
 end
 
 function entity:draw()
-    lg.rectangle("fill", math.floor(self.x), math.floor(self.y), self.w, self.h)
+    lg.rectangle("fill", math.ceil(self.x), math.ceil(self.y), self.w, self.h)
 end
 
 return entity
