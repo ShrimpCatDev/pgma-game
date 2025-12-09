@@ -24,6 +24,9 @@ function player:new(x, y)
     self.direction=1
 end
 
+local function round(num)
+    return math.floor(num)
+end
 
 
 function player:update(dt)
@@ -102,7 +105,11 @@ function player:draw()
     lg.setColor(0.5, 0.5, 1,0.5)
     player.super.draw(self)
     lg.setColor(1, 1, 1, 1)
-    self.anim.current:draw(self.sheet,math.ceil(self.x+6),math.ceil(self.y+8),0,self.direction,1,8,8)
+    if self.gravM>0 then
+        self.anim.current:draw(self.sheet,round(self.x+6),round(self.y+8),0,self.direction,1,8,8)
+    else
+        self.anim.current:draw(self.sheet,round(self.x+6),round(self.y+8),0,self.direction,-1,8,8)
+    end
     part.draw()
 end
 
