@@ -106,9 +106,9 @@ function player:draw()
     player.super.draw(self)
     lg.setColor(1, 1, 1, 1)
     if self.gravM>0 then
-        self.anim.current:draw(self.sheet,round(self.x+6),round(self.y+8),0,self.direction,1,8,8)
+        self.anim.current:draw(self.sheet,round(self.x+7),round(self.y+8),0,self.direction,1,8,8)
     else
-        self.anim.current:draw(self.sheet,round(self.x+6),round(self.y+8),0,self.direction,-1,8,8)
+        self.anim.current:draw(self.sheet,round(self.x+7),round(self.y+8),0,self.direction,-1,8,8)
     end
     part.draw()
 end
