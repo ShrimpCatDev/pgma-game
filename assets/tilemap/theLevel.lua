@@ -10,7 +10,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 5,
-  nextobjectid = 9,
+  nextobjectid = 12,
   properties = {},
   tilesets = {
     {
@@ -180,11 +180,11 @@ return {
       properties = {},
       encoding = "lua",
       data = {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 26, 26, 26, 27, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 41, 42, 42, 42, 43, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 41, 42, 42, 42, 43, 0,
+        22, 23, 23, 23, 23, 39, 55, 56, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        38, 39, 39, 39, 39, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        54, 55, 55, 55, 55, 56, 0, 0, 22, 24, 0, 0, 0, 0, 25, 26, 26, 26, 27, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 38, 40, 0, 0, 0, 0, 41, 42, 42, 42, 43, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 54, 56, 0, 0, 0, 0, 41, 42, 42, 42, 43, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 41, 42, 42, 42, 43, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 41, 22, 23, 23, 23, 24,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 57, 54, 55, 55, 55, 56,
@@ -270,6 +270,51 @@ return {
           visible = true,
           properties = {
             ["jumpthru"] = true,
+            ["platform"] = true
+          }
+        },
+        {
+          id = 9,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 0,
+          y = 0,
+          width = 96,
+          height = 48,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["platform"] = true
+          }
+        },
+        {
+          id = 10,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 96,
+          y = 0,
+          width = 32,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["platform"] = true
+          }
+        },
+        {
+          id = 11,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 128,
+          y = 32,
+          width = 32,
+          height = 48,
+          rotation = 0,
+          visible = true,
+          properties = {
             ["platform"] = true
           }
         }
