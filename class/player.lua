@@ -7,6 +7,9 @@ function player:new(x, y)
     -- Player Specific
     self.maxSpeed = 70
 
+    self.walkSpeed=70
+    self.runSpeed=100
+
     self.maxJumps = 3
     self.jumps = self.maxJumps
     self.doubleJump = false
@@ -56,6 +59,11 @@ function player:update(dt)
     end
 
     local max = self.maxSpeed
+
+    if input:down("run") then
+        max=self.runSpeed
+    end
+    
     if self.vx > max then self.vx = max end
     if self.vx < -max then self.vx = -max end
 
