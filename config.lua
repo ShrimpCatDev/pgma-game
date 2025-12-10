@@ -19,7 +19,7 @@ conf.input={
         gravity={"key:e"}, -- For testing
         djump={"key:r"}, -- For testing,
         run={"key:x"},
-        glide={"key:q"}
+        glide={"key:lctrl"}
     },
     pairs={
 

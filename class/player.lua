@@ -71,6 +71,20 @@ function player:update(dt)
     if input:down("run") then
         max=self.runSpeed
     end
+
+    if input:down("glide") and not self.isGrounded then
+        if self.gravM > 0 then
+            self.gravM = 0.3
+        else
+            self.gravM = -0.3
+        end
+    else
+        if self.gravM > 0 then
+            self.gravM = 1
+        else
+            self.gravM = -1
+        end
+    end
     
     if self.vx > max then self.vx = max end
     if self.vx < -max then self.vx = -max end
