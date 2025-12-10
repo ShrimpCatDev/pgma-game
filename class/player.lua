@@ -7,8 +7,8 @@ function player:new(x, y)
     -- Player Specific
     self.maxSpeed = 70
 
-    self.walkSpeed=70
-    self.runSpeed=100
+    self.walkSpeed = 70
+    self.runSpeed = 100
 
     self.maxJumps = 3
     self.trail = {
@@ -19,14 +19,14 @@ function player:new(x, y)
     self.jumps = self.maxJumps
     self.doubleJump = false
     self.isGrounded = false
-    
-    self.sheet=lg.newImage("assets/sprite/player.png")
-    local g=anim8.newGrid(16,16,self.sheet:getWidth(),self.sheet:getHeight())
-    self.anim={
-        run=anim8.newAnimation(g('1-12',1),0.05)
+
+    self.sheet = lg.newImage("assets/sprite/player.png")
+    local g = anim8.newGrid(16, 16, self.sheet:getWidth(), self.sheet:getHeight())
+    self.anim = {
+        run = anim8.newAnimation(g('1-12', 1), 0.05)
     }
-    self.anim.current=self.anim.run
-    self.direction=1
+    self.anim.current = self.anim.run
+    self.direction = 1
 end
 
 local function round(num)
@@ -44,10 +44,10 @@ function player:update(dt)
 
     if input:down("left") then
         self.vx = self.vx - acceleration * dt
-        self.direction=-1
+        self.direction = -1
     elseif input:down("right") then
         self.vx = self.vx + acceleration * dt
-        self.direction=1
+        self.direction = 1
     else
         if self.vx > 0 then
             self.vx = self.vx - friction * dt
@@ -69,23 +69,36 @@ function player:update(dt)
     local max = self.maxSpeed
 
     if input:down("run") then
-        max=self.runSpeed
+        max = self.runSpeed
     end
 
     if input:down("glide") and not self.isGrounded then
         if self.gravM > 0 then
-            self.gravM = 0.3
+            self.gravM = 0.2
         else
-            self.gravM = -0.3
+            self.gravM = -0.2
         end
+        self.trail.enabled = true
     else
         if self.gravM > 0 then
             self.gravM = 1
         else
             self.gravM = -1
         end
+        self.trail.enabled = false
     end
-    
+
+    if self.trail.enabled then
+        table.insert(self.trail.points, self.x + self.w / 2)
+        table.insert(self.trail.points, self.y + self.h / 2)
+        if #self.trail.points > self.trail.maxPoints * 2 then
+            table.remove(self.trail.points, 1) 
+            table.remove(self.trail.points, 1) 
+        end
+    else
+        self.trail.points = {}
+    end
+
     if self.vx > max then self.vx = max end
     if self.vx < -max then self.vx = -max end
 
@@ -94,7 +107,7 @@ function player:update(dt)
 
     for i = 1, self.len do
         local col = self.col[i]
-        if col.other.properties and col.other.properties.platform and col.normal.y == -self.gravM  then
+        if col.other.properties and col.other.properties.platform and col.normal.y == -self.gravM then
             if math.abs(self.vy) < 50 then
                 self.vy = 0
                 self.isGrounded = true
@@ -121,25 +134,28 @@ function player:update(dt)
 end
 
 function player:draw()
-    lg.setColor(0.5, 0.5, 1,0.5)
+    lg.setColor(0.5, 0.5, 1, 0)
     player.super.draw(self)
     lg.setColor(1, 1, 1, 1)
-    if self.gravM>0 then
-        self.anim.current:draw(self.sheet,round(self.x+7),round(self.y+8),0,self.direction,1,8,8)
+    if #self.trail.points > 2 then
+        lg.line(self.trail.points)
+    end
+    if self.gravM > 0 then
+        self.anim.current:draw(self.sheet, round(self.x + 7), round(self.y + 8), 0, self.direction, 1, 8, 8)
     else
-        self.anim.current:draw(self.sheet,round(self.x+7),round(self.y+8),0,self.direction,-1,8,8)
+        self.anim.current:draw(self.sheet, round(self.x + 7), round(self.y + 8), 0, self.direction, -1, 8, 8)
     end
     part.draw()
 end
 
 function player:spawnShockwave(x, y, vDep)
-    local amt = 35 * (vDep and self.vy/20 or 1)
+    local amt = 35 * (vDep and self.vy / 20 or 1)
     -- @param vDep - Velocity Dependent
     local function drawDust(x, y, life, data)
         local t = math.max(life, 0)
         local a = t * 2.5
         local r = data.size * t
-        lg.setColor(1,1,1, a)
+        lg.setColor(1, 1, 1, a)
         lg.circle("fill", x, y, r)
     end
     local baseX = x
