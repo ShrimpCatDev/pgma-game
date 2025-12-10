@@ -11,6 +11,11 @@ function player:new(x, y)
     self.runSpeed=100
 
     self.maxJumps = 3
+    self.trail = {
+        enabled = false,
+        points = {},
+        maxPoints = 10,
+    }
     self.jumps = self.maxJumps
     self.doubleJump = false
     self.isGrounded = false

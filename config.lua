@@ -18,7 +18,8 @@ conf.input={
         jump={"key:z", "key:up", "key:space"},
         gravity={"key:e"}, -- For testing
         djump={"key:r"}, -- For testing,
-        run={"key:x"}
+        run={"key:x"},
+        glide={"key:q"}
     },
     pairs={
 
