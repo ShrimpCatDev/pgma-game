@@ -1,6 +1,16 @@
 local entity = require("class/entity")
 local player = entity:extend()
 
+local function sign(n)
+    if n<0 then
+        return -1
+    elseif n>0 then
+        return 1
+    else
+        return 0
+    end
+end
+
 function player:new(x, y)
     player.super.new(self, x, y, 12, 16)
 
@@ -119,6 +129,9 @@ function player:update(dt)
             if not self.jump and self.vy > velocityHeight then
                 self:spawnShockwave(self.x + self.w / 2, self.y + self.h, true)
             end
+        end
+        if col.other.properties and col.other.properties.platform and col.normal.y==sign(self.gravM) then
+            self.vy=0
         end
     end
 
