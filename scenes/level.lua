@@ -1,6 +1,9 @@
 local lvl = {}
 
 function lvl:load()
+    self.fade=require("fade")
+    self.fade:init(conf.gW,-120)
+
     world = bump.newWorld()
     world.gravity = 900
 
@@ -32,7 +35,7 @@ function lvl:update(dt)
 
     camera.x = clamp(camera.x, 0, map.width * map.tilewidth - conf.gW)
     camera.y = clamp(camera.y, 0, map.height * map.tileheight - conf.gH)
-
+    self.fade:update(dt)
 end
 
 function lvl:draw()
@@ -47,6 +50,7 @@ function lvl:draw()
             lg.print("double jump: "..tostring(player.doubleJump).."\ninverted grav: "..player.gravM, math.floor(player.x - 40), math.floor(player.y - 40))
             lg.translate(0, 0)
         lg.pop()
+        self.fade:draw()
     endDraw()
 end
 

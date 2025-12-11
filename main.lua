@@ -21,6 +21,7 @@
 require("init")
 
 function love.load()
+    timer=require("lib/hump/timer")
     local sceneryInit=require("lib/scenery")
     scenery=sceneryInit("level","scenes")
     scenery:hook(love)
