@@ -53,6 +53,16 @@ function player:kill()
     self.y = self.spawnY
     self.vx = 0
     self.vy = 0
+
+    if world.update then
+        world:update(self, self.x, self.y, self.w, self.h)
+    else
+        world:remove(self)
+        world:add(self, self.x, self.y, self.w, self.h)
+    end
+
+    self.col = {}
+    self.len = 0
 end
 
 function player:update(dt)
