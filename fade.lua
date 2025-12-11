@@ -1,7 +1,7 @@
 local fade={}
 fade.timer=require("lib/hump/timer")
 
-function fade:init(firstValue,lastValue)
+function fade:init(firstValue,lastValue,func)
     self.timer.clear()
     self.x=0
     self.y=0
@@ -9,8 +9,9 @@ function fade:init(firstValue,lastValue)
     self.h=conf.gH
     self.open=true
 
-    self.timer.tween(1,self,{w=lastValue},"out-cubic",function()
+    self.timer.tween(0.8,self,{w=lastValue},"out-cubic",function()
         self.open=false
+        if func then func() end
     end)
 end
 

@@ -28,7 +28,7 @@ end
 function lvl:update(dt)
     if not self.fade.open then
         map:update(dt)
-        player:update(dt,self)
+        player:update(dt,lvl)
         spike:update(dt)
         bot:update(dt)
         camera.x = (player.x + player.w / 2) - conf.gW / 2
