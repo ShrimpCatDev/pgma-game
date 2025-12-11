@@ -65,7 +65,7 @@ function player:kill()
     self.len = 0
 end
 
-function player:update(dt)
+function player:update(dt,scene)
     part.update(dt)
     self.isGrounded = false
 

@@ -26,15 +26,17 @@ function lvl:load()
 end
 
 function lvl:update(dt)
-    map:update(dt)
-    player:update(dt)
-    spike:update(dt)
-    bot:update(dt)
-    camera.x = (player.x + player.w / 2) - conf.gW / 2
-    camera.y = (player.y + player.h / 2) - conf.gH / 2
+    if not self.fade.open then
+        map:update(dt)
+        player:update(dt,self)
+        spike:update(dt)
+        bot:update(dt)
+        camera.x = (player.x + player.w / 2) - conf.gW / 2
+        camera.y = (player.y + player.h / 2) - conf.gH / 2
 
-    camera.x = clamp(camera.x, 0, map.width * map.tilewidth - conf.gW)
-    camera.y = clamp(camera.y, 0, map.height * map.tileheight - conf.gH)
+        camera.x = clamp(camera.x, 0, map.width * map.tilewidth - conf.gW)
+        camera.y = clamp(camera.y, 0, map.height * map.tileheight - conf.gH)
+    end
     self.fade:update(dt)
 end
 
