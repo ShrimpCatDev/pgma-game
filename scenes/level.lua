@@ -11,20 +11,21 @@ function lvl:load()
     print("loaded!")
 
     camera = { x = 0, y = 0 }
-    CloudShader = lg.newShader("shaders/cloud.glsl")
 
     local p = require("class/player")
     local b = require("class/bot")
+    local s = require("class/spike")
     player = p(20, 70)
     bot = b(100, 70)
+    spike = s(150, 70)
 
     TIME = 0
 end
 
 function lvl:update(dt)
-    TIME = TIME + dt
     map:update(dt)
     player:update(dt)
+    spike:update(dt)
     bot:update(dt)
     camera.x = (player.x + player.w / 2) - conf.gW / 2
     camera.y = (player.y + player.h / 2) - conf.gH / 2
@@ -32,24 +33,15 @@ function lvl:update(dt)
     camera.x = clamp(camera.x, 0, map.width * map.tilewidth - conf.gW)
     camera.y = clamp(camera.y, 0, map.height * map.tileheight - conf.gH)
 
-    CloudShader:send("iTime", TIME)
-    CloudShader:send("iResolution", { lg.getWidth(), lg.getHeight() })
 end
 
 function lvl:draw()
     beginDraw()
-        lg.setBlendMode("alpha", "premultiplied")
-
-            lg.setShader(CloudShader)
-                lg.rectangle("fill", 0, 0, lg.getWidth(), lg.getHeight())
-            lg.setShader()
-
-        lg.setBlendMode("alpha")
-
         lg.push()
             lg.translate(math.floor(-camera.x), math.floor(-camera.y))
             map:draw(-camera.x, -camera.y)
             bot:draw()
+            spike:draw()
             player:draw()
             lg.setColor(1,1,1)
             lg.print("double jump: "..tostring(player.doubleJump).."\ninverted grav: "..player.gravM, math.floor(player.x - 40), math.floor(player.y - 40))

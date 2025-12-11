@@ -2,9 +2,9 @@ local entity = require("class/entity")
 local player = entity:extend()
 
 local function sign(n)
-    if n<0 then
+    if n < 0 then
         return -1
-    elseif n>0 then
+    elseif n > 0 then
         return 1
     else
         return 0
@@ -54,7 +54,6 @@ function player:kill()
     self.vx = 0
     self.vy = 0
 end
-
 
 function player:update(dt)
     part.update(dt)
@@ -118,8 +117,8 @@ function player:update(dt)
         table.insert(self.trail.points, self.x + self.w / 2)
         table.insert(self.trail.points, self.y + self.h / 2)
         if #self.trail.points > self.trail.maxPoints * 2 then
-            table.remove(self.trail.points, 1) 
-            table.remove(self.trail.points, 1) 
+            table.remove(self.trail.points, 1)
+            table.remove(self.trail.points, 1)
         end
     else
         self.trail.points = {}
@@ -146,11 +145,17 @@ function player:update(dt)
                 self:spawnShockwave(self.x + self.w / 2, self.y + self.h, true)
             end
         end
-        if col.other.properties and col.other.properties.platform and col.normal.y==sign(self.gravM) then
-            self.vy=0
+        if col.other.properties and col.other.properties.platform and col.normal.y == sign(self.gravM) then
+            self.vy = 0
         end
     end
+    for i = 1, self.len do
+        local col = self.col[i]
 
+        if col.other.isSpike then
+            self:kill()
+        end
+    end
     if input:pressed("jump") and self.jumps > 0 then
         self.vy = -250 * self.gravM
         if not self.isGrounded then
