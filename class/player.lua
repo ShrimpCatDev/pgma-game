@@ -14,6 +14,9 @@ end
 function player:new(x, y)
     player.super.new(self, x, y, 12, 16)
 
+    self.spawnX = x
+    self.spawnY = y
+
     -- Player Specific
     self.maxSpeed = 70
 
@@ -41,6 +44,15 @@ end
 
 local function round(num)
     return math.floor(num)
+end
+
+function player:kill()
+    self.gravM = 1
+    self.direction = 1
+    self.x = self.spawnX
+    self.y = self.spawnY
+    self.vx = 0
+    self.vy = 0
 end
 
 
@@ -74,6 +86,10 @@ function player:update(dt)
 
     if input:pressed("djump") then
         self.doubleJump = not self.doubleJump
+    end
+
+    if input:pressed("kill") then
+        self:kill()
     end
 
     local max = self.maxSpeed
