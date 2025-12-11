@@ -26,7 +26,7 @@ function lvl:load()
 end
 
 function lvl:update(dt)
-    if not self.fade.open then
+    --if not self.fade.open then
         map:update(dt)
         player:update(dt,lvl)
         spike:update(dt)
@@ -36,7 +36,7 @@ function lvl:update(dt)
 
         camera.x = clamp(camera.x, 0, map.width * map.tilewidth - conf.gW)
         camera.y = clamp(camera.y, 0, map.height * map.tileheight - conf.gH)
-    end
+    --end
     self.fade:update(dt)
 end
 
