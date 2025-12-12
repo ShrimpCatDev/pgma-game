@@ -27,7 +27,7 @@ function love.load()
     scenery:hook(love)
     
 
-    font = require("assets/font/skull")
+    font = require("assets/font/fruity")
     lg.setFont(font)
     shove.createLayer("game")
 

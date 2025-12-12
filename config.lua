@@ -21,7 +21,7 @@ conf.input={
         kill={"key:r"},
         run={"key:x"},
         glide={"key:lctrl"},
-        action={"key:z"},
+        action={"key:x"},
         up={"key:up","key:w"},
         down={"key:down","key:s"}
     },

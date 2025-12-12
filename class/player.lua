@@ -184,7 +184,7 @@ function player:update(dt,scene)
     else
         self.anim.current=self.anim.idle
     end
-    self.anim.current:update(dt)
+    
 end
 
 function player:draw()

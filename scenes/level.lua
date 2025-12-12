@@ -32,11 +32,14 @@ function lvl:load()
     talkies.rounding = 2
     talkies.titleBackgroundColor = color("#2745fe")
     talkies.messageBackgroundColor = color("#000000")
+
+    self.canTalk=false
 end
 
 function lvl:update(dt)
+    map:update(dt)
     if not talkies.isOpen() then
-        map:update(dt)
+        
         player:update(dt, lvl)
         local mapBottom = map.height * map.tileheight
         local mapTop = 0
@@ -51,13 +54,21 @@ function lvl:update(dt)
         local dy = (player.y + player.h / 2) - (bot.y + bot.h / 2)
         local dist = math.sqrt(dx * dx + dy * dy)
 
-        if dist < 50 and not talkies.isOpen() and not self.nearBot and input:pressed("action") then
+        local d=15
+
+        if dist < d and not talkies.isOpen() and not self.nearBot and input:pressed("action") then
             self.nearBot = true
-            talkies.say("Bot", "Hey there traveler! Welcome.")
+            player.anim.current=player.anim.idle
+            talkies.say("bot", "hey there traveler! welcome.")
         end
 
-        if dist >= 50 then
+        if dist<d then
+            self.canTalk=true
+        end
+
+        if dist >= d then
             self.nearBot = false
+            self.canTalk=false
         end
         camera.x = (player.x + player.w / 2) - conf.gW / 2
         camera.y = (player.y + player.h / 2) - conf.gH / 2
@@ -73,6 +84,7 @@ function lvl:update(dt)
             talkies.nextOption()
         end
     end
+    player.anim.current:update(dt)
     self.fade:update(dt)
 end
 
@@ -87,6 +99,19 @@ function lvl:draw()
     lg.setColor(1, 1, 1)
     lg.print("double jump: " .. tostring(player.doubleJump) .. "\ninverted grav: " .. player.gravM,
         math.floor(player.x - 40), math.floor(player.y - 40))
+    if self.canTalk then
+        local msg="x: talk"
+        lg.setColor(0,0,0,1)
+
+        local x,y=math.ceil(player.x),math.ceil(player.y)
+
+        lg.print(msg,x+player.w/2-(font:getWidth(msg)/2)+1,y-8)
+        lg.print(msg,x+player.w/2-(font:getWidth(msg)/2)-1,y-8)
+        lg.print(msg,x+player.w/2-(font:getWidth(msg)/2),y-8+1)
+        lg.print(msg,x+player.w/2-(font:getWidth(msg)/2),y-8-1)
+        lg.setColor(1,1,1,1)
+        lg.print(msg,x+player.w/2-(font:getWidth(msg)/2),y-8)
+    end
     lg.translate(0, 0)
     lg.pop()
     talkies.draw()
