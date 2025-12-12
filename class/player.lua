@@ -200,7 +200,14 @@ end
 function player:draw()
     lg.setColor(0.5, 0.5, 1, 0)
     player.super.draw(self)
-    lg.setColor(1, 1, 1, 1)
+    lg.setLineWidth(4)
+    lg.setColor(0,0,0, 1)
+    if #self.trail.points > 2 then
+        lg.line(self.trail.points)
+    end
+    lg.setLineWidth(2)
+
+        lg.setColor(1,1,1, 1)
     if #self.trail.points > 2 then
         lg.line(self.trail.points)
     end
