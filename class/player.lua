@@ -36,9 +36,10 @@ function player:new(x, y)
     self.sheet = lg.newImage("assets/sprite/player.png")
     local g = anim8.newGrid(16, 16, self.sheet:getWidth(), self.sheet:getHeight())
     self.anim = {
-        run = anim8.newAnimation(g('1-12', 1), 0.05)
+        run = anim8.newAnimation(g('1-12', 1), 0.05),
+        idle = anim8.newAnimation(g('1-6', 2), 0.1)
     }
-    self.anim.current = self.anim.run
+    self.anim.current = self.anim.idle
     self.direction = 1
 end
 
@@ -73,12 +74,15 @@ function player:update(dt,scene)
     local acceleration = 1000
     local friction = 2000
 
+    local moved=false
     if input:down("left") then
         self.vx = self.vx - acceleration * dt
         self.direction = -1
+        moved=true
     elseif input:down("right") then
         self.vx = self.vx + acceleration * dt
         self.direction = 1
+        moved=true
     else
         if self.vx > 0 then
             self.vx = self.vx - friction * dt
@@ -174,6 +178,12 @@ function player:update(dt,scene)
         self.jumps = self.jumps - 1
     end
     print(self.isGrounded)
+
+    if moved then
+        self.anim.current=self.anim.run
+    else
+        self.anim.current=self.anim.idle
+    end
     self.anim.current:update(dt)
 end
 
