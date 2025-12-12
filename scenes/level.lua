@@ -21,6 +21,8 @@ function lvl:load()
     local p = require("class/player")
     local b = require("class/bot")
     local s = require("class/spike")
+
+
     player = p(20, 70)
     bot = b(100, 70)
     spike = s(150, 70)
@@ -32,6 +34,8 @@ function lvl:load()
     talkies.rounding = 2
     talkies.titleBackgroundColor = color("#2745fe")
     talkies.messageBackgroundColor = color("#000000")
+
+    currentStatDialogue = "double jumps"
 
     self.canTalk=false
 end
@@ -60,6 +64,10 @@ function lvl:update(dt)
             self.nearBot = true
             player.anim.current=player.anim.idle
             talkies.say("bot", "hey there traveler! welcome.")
+            talkies.say("Bot", "the world is dangerous beyond this point.")
+            talkies.say("Bot", "everything just seems so familiar")
+            talkies.say("Bot", "hmmm, anyways")
+            talkies.say("Bot", "use your "..currentStatDialogue.." wisely.")
         end
 
         if dist<d then
