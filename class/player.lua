@@ -217,7 +217,7 @@ function player:spawnShockwave(x, y, vDep)
     -- @param vDep - Velocity Dependent
     local function drawDust(x, y, life, data)
         local t = math.max(life, 0)
-        local a = t * 2.5
+        local a = t * 0.5
         local r = data.size * t
         lg.setColor(1, 1, 1, a)
         lg.circle("fill", x, y, r)

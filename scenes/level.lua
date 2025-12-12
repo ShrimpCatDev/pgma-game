@@ -25,7 +25,7 @@ function lvl:load()
 
     player = p(20, 70)
     bot = b(100, 70)
-    spike = s(150, 70)
+    -- spike = s(150, 70)
 
     TIME = 0
 
@@ -35,7 +35,14 @@ function lvl:load()
     talkies.titleBackgroundColor = color("#2745fe")
     talkies.messageBackgroundColor = color("#000000")
 
-    currentStatDialogue = "double jumps"
+    levelStats={
+        "double jump",
+        "flip gravity",
+        "glide",
+        "sprint"
+        --etc...
+    }
+currentStatDialouge=levelStats[level]
 
     self.canTalk=false
 end
@@ -51,7 +58,7 @@ function lvl:update(dt)
         if player.y > mapBottom + 50 or player.y < mapTop - 50 then
             player:kill()
         end
-        spike:update(dt)
+        -- spike:update(dt)
         bot:update(dt)
 
         local dx = (player.x + player.w / 2) - (bot.x + bot.w / 2)
@@ -64,10 +71,10 @@ function lvl:update(dt)
             self.nearBot = true
             player.anim.current=player.anim.idle
             talkies.say("bot", "hey there traveler! welcome.")
-            talkies.say("Bot", "the world is dangerous beyond this point.")
-            talkies.say("Bot", "everything just seems so familiar")
-            talkies.say("Bot", "hmmm, anyways")
-            talkies.say("Bot", "use your "..currentStatDialogue.." wisely.")
+            talkies.say("bot", "the world is dangerous beyond this point.")
+            talkies.say("bot", "everything just seems so familiar")
+            talkies.say("bot", "hmmm, anyways")
+            talkies.say("bot", "use your "..currentStatDialogue.." wisely.")
         end
 
         if dist<d then
@@ -102,7 +109,7 @@ function lvl:draw()
     lg.translate(math.floor(-camera.x), math.floor(-camera.y))
     map:draw(-camera.x, -camera.y)
     bot:draw()
-    spike:draw()
+    -- spike:draw()
     player:draw()
     lg.setColor(1, 1, 1)
     lg.print("double jump: " .. tostring(player.doubleJump) .. "\ninverted grav: " .. player.gravM,
