@@ -166,7 +166,7 @@ function player:update(dt,scene)
     for i = 1, self.len do
         local col = self.col[i]
 
-        if col.other.isSpike then
+        if col.other.isSpike or (col.other.properties and col.other.properties.death) then
             self:kill()
         end
     end

@@ -42,6 +42,76 @@ return {
       tilecount = 256,
       tiles = {
         {
+          id = 10,
+          objectGroup = {
+            type = "objectgroup",
+            draworder = "index",
+            id = 4,
+            name = "",
+            class = "",
+            visible = true,
+            opacity = 1,
+            offsetx = 0,
+            offsety = 0,
+            parallaxx = 1,
+            parallaxy = 1,
+            properties = {},
+            objects = {
+              {
+                id = 3,
+                name = "",
+                type = "",
+                shape = "rectangle",
+                x = 1,
+                y = 10,
+                width = 14,
+                height = 6,
+                rotation = 0,
+                visible = true,
+                properties = {
+                  ["collidable"] = true,
+                  ["death"] = true
+                }
+              }
+            }
+          }
+        },
+        {
+          id = 11,
+          objectGroup = {
+            type = "objectgroup",
+            draworder = "index",
+            id = 2,
+            name = "",
+            class = "",
+            visible = true,
+            opacity = 1,
+            offsetx = 0,
+            offsety = 0,
+            parallaxx = 1,
+            parallaxy = 1,
+            properties = {},
+            objects = {
+              {
+                id = 1,
+                name = "",
+                type = "",
+                shape = "rectangle",
+                x = 1,
+                y = 0,
+                width = 14,
+                height = 6,
+                rotation = 0,
+                visible = true,
+                properties = {
+                  ["collidable"] = true,
+                  ["death"] = true
+                }
+              }
+            }
+          }
+        },
+        {
           id = 21,
           properties = {
             ["collidable"] = true,
@@ -157,7 +227,7 @@ return {
       offsetx = 0,
       offsety = 0,
       parallaxx = 0.25,
-      parallaxy = 0.1,
+      parallaxy = 0,
       repeatx = true,
       repeaty = false,
       properties = {}
@@ -173,7 +243,7 @@ return {
       offsetx = 0,
       offsety = 0,
       parallaxx = 0.5,
-      parallaxy = 0.12,
+      parallaxy = 0,
       repeatx = true,
       repeaty = false,
       properties = {}

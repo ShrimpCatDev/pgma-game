@@ -5,6 +5,26 @@
  </editorsettings>
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="256" columns="16">
   <image source="tileset.png" width="256" height="256"/>
+  <tile id="10">
+   <objectgroup draworder="index" id="4">
+    <object id="3" x="1" y="10" width="14" height="6">
+     <properties>
+      <property name="collidable" type="bool" value="true"/>
+      <property name="death" type="bool" value="true"/>
+     </properties>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="11">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="1" y="0" width="14" height="6">
+     <properties>
+      <property name="collidable" type="bool" value="true"/>
+      <property name="death" type="bool" value="true"/>
+     </properties>
+    </object>
+   </objectgroup>
+  </tile>
   <tile id="21">
    <properties>
     <property name="collidable" type="bool" value="true"/>
@@ -63,10 +83,10 @@
  <imagelayer id="8" name="parralax3" parallaxx="0.1" parallaxy="0" repeatx="1">
   <image source="../bg/stars.png" width="160" height="144"/>
  </imagelayer>
- <imagelayer id="6" name="parralax2" parallaxx="0.25" parallaxy="0.1" repeatx="1">
+ <imagelayer id="6" name="parralax2" parallaxx="0.25" parallaxy="0" repeatx="1">
   <image source="../bg/cloud2.png" width="160" height="144"/>
  </imagelayer>
- <imagelayer id="5" name="parralax" parallaxx="0.5" parallaxy="0.12" repeatx="1">
+ <imagelayer id="5" name="parralax" parallaxx="0.5" parallaxy="0" repeatx="1">
   <image source="../bg/cloud1.png" width="160" height="144"/>
  </imagelayer>
  <layer id="3" name="bg" width="60" height="20" visible="0">
