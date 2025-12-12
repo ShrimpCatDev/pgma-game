@@ -33,11 +33,13 @@ function love.load()
 
     sti=require("lib/sti")
 
+    talkies=require"lib/talkies"
     scenery.setScene("level")
 end
 
 function love.update(dt)
     input:update()
+    talkies.update(dt)
 end 
 
 function love.draw()

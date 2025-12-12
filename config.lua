@@ -20,7 +20,10 @@ conf.input={
         djump={"key:q"}, -- For testing,
         kill={"key:r"},
         run={"key:x"},
-        glide={"key:lctrl"}
+        glide={"key:lctrl"},
+        action={"key:z"},
+        up={"key:up","key:w"},
+        down={"key:down","key:s"}
     },
     pairs={
 

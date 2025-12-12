@@ -23,10 +23,17 @@ function lvl:load()
     spike = s(150, 70)
 
     TIME = 0
+
+    talkies.font=font
+    talkies.padding=4
+    talkies.rounding=2
+    talkies.titleBackgroundColor=color("#2745fe")
+    talkies.messageBackgroundColor=color("#000000")
+    talkies.say("mystical dev","hello world!")
 end
 
 function lvl:update(dt)
-    --if not self.fade.open then
+    if not talkies.isOpen() then
         map:update(dt)
         player:update(dt,lvl)
         spike:update(dt)
@@ -36,7 +43,15 @@ function lvl:update(dt)
 
         camera.x = clamp(camera.x, 0, map.width * map.tilewidth - conf.gW)
         camera.y = clamp(camera.y, 0, map.height * map.tileheight - conf.gH)
-    --end
+    else
+        if input:pressed("action") then
+            talkies.onAction()
+        elseif input:pressed("up") then
+            talkies.prevOption()
+        elseif input:pressed("down") then
+            talkies.nextOption()
+        end
+    end
     self.fade:update(dt)
 end
 
@@ -52,6 +67,7 @@ function lvl:draw()
             lg.print("double jump: "..tostring(player.doubleJump).."\ninverted grav: "..player.gravM, math.floor(player.x - 40), math.floor(player.y - 40))
             lg.translate(0, 0)
         lg.pop()
+        talkies.draw()
         self.fade:draw()
     endDraw()
 end
