@@ -37,7 +37,9 @@ function player:new(x, y)
     local g = anim8.newGrid(16, 16, self.sheet:getWidth(), self.sheet:getHeight())
     self.anim = {
         run = anim8.newAnimation(g('1-12', 1), 0.05),
-        idle = anim8.newAnimation(g('1-6', 2), 0.1)
+        idle = anim8.newAnimation(g('1-6', 2), 0.1),
+        jump = anim8.newAnimation(g('1-2', 3), 0.1),
+        fall = anim8.newAnimation(g('1-2', 4), 0.1)
     }
     self.anim.current = self.anim.idle
     self.direction = 1
@@ -179,10 +181,18 @@ function player:update(dt,scene)
     end
     print(self.isGrounded)
 
-    if moved then
-        self.anim.current=self.anim.run
+    if self.isGrounded then
+        if moved then
+            self.anim.current=self.anim.run
+        else
+            self.anim.current=self.anim.idle
+        end
     else
-        self.anim.current=self.anim.idle
+        if self.vy<=0 then
+            self.anim.current=self.anim.jump
+        else
+            self.anim.current=self.anim.fall
+        end
     end
     
 end
