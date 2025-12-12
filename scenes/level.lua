@@ -32,7 +32,6 @@ function lvl:load()
     talkies.rounding = 2
     talkies.titleBackgroundColor = color("#2745fe")
     talkies.messageBackgroundColor = color("#000000")
-    talkies.say("mystical dev", "hello world!")
 end
 
 function lvl:update(dt)
@@ -47,6 +46,19 @@ function lvl:update(dt)
         end
         spike:update(dt)
         bot:update(dt)
+
+        local dx = (player.x + player.w / 2) - (bot.x + bot.w / 2)
+        local dy = (player.y + player.h / 2) - (bot.y + bot.h / 2)
+        local dist = math.sqrt(dx * dx + dy * dy)
+
+        if dist < 50 and not talkies.isOpen() and not self.nearBot and input:pressed("action") then
+            self.nearBot = true
+            talkies.say("Bot", "Hey there traveler! Welcome.")
+        end
+
+        if dist >= 50 then
+            self.nearBot = false
+        end
         camera.x = (player.x + player.w / 2) - conf.gW / 2
         camera.y = (player.y + player.h / 2) - conf.gH / 2
 
