@@ -156,11 +156,6 @@
     <property name="platform" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="9" x="0" y="0" height="304">
-   <properties>
-    <property name="platform" type="bool" value="true"/>
-   </properties>
-  </object>
   <object id="10" x="96" y="0" width="224" height="16">
    <properties>
     <property name="platform" type="bool" value="true"/>

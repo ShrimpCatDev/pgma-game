@@ -346,21 +346,6 @@ return {
           }
         },
         {
-          id = 9,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 0,
-          y = 0,
-          width = 0,
-          height = 304,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["platform"] = true
-          }
-        },
-        {
           id = 10,
           name = "",
           type = "",
