@@ -43,6 +43,11 @@ function player:new(x, y)
     }
     self.anim.current = self.anim.idle
     self.direction = 1
+    self.power=levelStats[level]
+
+    if self.power=="double jump" then
+        self.doubleJump = true
+    end
 end
 
 local function round(num)
@@ -172,7 +177,7 @@ function player:update(dt,scene)
             self:kill()
         end
     end
-    if input:pressed("jump") and self.jumps > 0 then
+    if input:pressed("jump") and self.jumps > 1 then
         self.vy = -250 * self.gravM
         if not self.isGrounded then
             self:spawnShockwave(self.x + self.w / 2, self.y + self.h, false)

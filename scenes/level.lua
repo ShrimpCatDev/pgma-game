@@ -1,5 +1,13 @@
 local lvl = {}
 
+levelStats={
+    "double jump",
+    "flip gravity",
+    "glide",
+    "sprint"
+    --etc...
+}
+
 function lvl:load()
     self.fade = require("fade")
     self.fade:init(conf.gW, -120)
@@ -35,14 +43,8 @@ function lvl:load()
     talkies.titleBackgroundColor = color("#2745fe")
     talkies.messageBackgroundColor = color("#000000")
 
-    levelStats={
-        "double jump",
-        "flip gravity",
-        "glide",
-        "sprint"
-        --etc...
-    }
-currentStatDialouge=levelStats[level]
+    
+    currentStatDialouge=levelStats[level]
 
     self.canTalk=false
 end
@@ -74,7 +76,7 @@ function lvl:update(dt)
             talkies.say("bot", "the world is dangerous beyond this point.")
             talkies.say("bot", "everything just seems so familiar")
             talkies.say("bot", "hmmm, anyways")
-            talkies.say("bot", "use your "..currentStatDialogue.." wisely.")
+            talkies.say("bot", "use your "..currentStatDialouge.." wisely.")
         end
 
         if dist<d then
@@ -100,6 +102,7 @@ function lvl:update(dt)
         end
     end
     player.anim.current:update(dt)
+    bot.anim.idle:update(dt)
     self.fade:update(dt)
 end
 
@@ -112,8 +115,8 @@ function lvl:draw()
     -- spike:draw()
     player:draw()
     lg.setColor(1, 1, 1)
-    lg.print("double jump: " .. tostring(player.doubleJump) .. "\ninverted grav: " .. player.gravM,
-        math.floor(player.x - 40), math.floor(player.y - 40))
+    --[[lg.print("double jump: " .. tostring(player.doubleJump) .. "\ninverted grav: " .. player.gravM,
+        math.floor(player.x - 40), math.floor(player.y - 40))]]
     if self.canTalk then
         local msg="x: talk"
         lg.setColor(0,0,0,1)
