@@ -21,6 +21,12 @@
 require("init")
 
 function love.load()
+    music={
+        level=love.audio.newSource("assets/music/bgm.mp3","static") --static because love.js only supports static sound sources
+    }
+
+    sound={}
+
     level=1
     timer=require("lib/hump/timer")
     local sceneryInit=require("lib/scenery")

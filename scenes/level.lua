@@ -9,6 +9,10 @@ levelStats={
 }
 
 function lvl:load()
+    self.bgm=music.level
+    self.bgm:setLooping(true)
+    self.bgm:play()
+    
     self.fade = require("fade")
     self.fade:init(conf.gW, -120)
 
@@ -47,6 +51,7 @@ function lvl:load()
     currentStatDialouge=levelStats[level]
 
     self.canTalk=false
+    self.bgm:play()
 end
 
 function lvl:update(dt)
