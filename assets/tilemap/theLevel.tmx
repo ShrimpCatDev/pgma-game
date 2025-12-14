@@ -88,6 +88,10 @@
    </animation>
   </tile>
   <tile id="83">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="levelEnd" type="bool" value="true"/>
+   </properties>
    <animation>
     <frame tileid="83" duration="150"/>
     <frame tileid="84" duration="150"/>
@@ -95,7 +99,8 @@
   </tile>
   <tile id="84">
    <properties>
-    <property name="end" type="bool" value="false"/>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="levelEnd" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="96">

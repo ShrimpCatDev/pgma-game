@@ -219,6 +219,10 @@ return {
         },
         {
           id = 83,
+          properties = {
+            ["collidable"] = true,
+            ["levelEnd"] = true
+          },
           animation = {
             {
               tileid = 83,
@@ -233,7 +237,8 @@ return {
         {
           id = 84,
           properties = {
-            ["end"] = false
+            ["collidable"] = true,
+            ["levelEnd"] = true
           }
         },
         {

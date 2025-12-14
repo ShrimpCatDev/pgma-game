@@ -56,9 +56,64 @@ local function round(num)
     return math.floor(num)
 end
 
+function player:nextLevel()
+    level=level+1
+    frozen=true
+    self.power=levelStats[level]
+    if self.power=="double jump" then
+        self.doubleJump = true
+    else
+        self.doubleJump = false
+    end
+    print(level)
+    print(self.power)
+    print(self.doubleJump)
+
+    timer.tween(0.5,trans,{w=conf.gW,ty=conf.gH/2},"out-cubic",function()
+        if level>#levelStats then
+            timer.script(function(wait)
+                wait(0.5)
+                timer.tween(0.5,trans,{ty=-8},"out-cubic")
+                wait(0.5)
+                trans.txt="the end... for now."
+                timer.tween(0.5,trans,{ty=conf.gH/2},"out-cubic")
+                wait(2)
+                timer.tween(0.5,trans,{ty=-8},"out-cubic")
+                wait(0.5)
+                trans.txt="ty for playing!"
+                timer.tween(0.5,trans,{ty=conf.gH/2},"out-cubic")
+            end)
+        else
+            self.gravM = 1
+            self.direction = 1
+            self.x = self.spawnX
+            self.y = self.spawnY
+            self.vx = 0
+            self.vy = 0
+
+            if world.update then
+                world:update(self, self.x, self.y, self.w, self.h)
+            else
+                world:remove(self)
+                world:add(self, self.x, self.y, self.w, self.h)
+            end
+
+            self.col = {}
+            self.len = 0
+            
+            timer.after(0.8,function()
+                frozen=false
+                timer.tween(0.5,trans,{w=0,ty=-8},"out-cubic",function()
+                    
+                end)
+            end)
+        end
+    end)
+end
+
 function player:kill()
     frozen=true
-    timer.tween(0.5,trans,{w=conf.gW},"in-cubic",function()
+    timer.tween(0.5,trans,{w=conf.gW},"out-cubic",function()
         self.gravM = 1
         self.direction = 1
         self.x = self.spawnX
@@ -76,7 +131,7 @@ function player:kill()
         self.col = {}
         self.len = 0
         frozen=false
-        timer.tween(0.5,trans,{w=0},"in-cubic",function()
+        timer.tween(0.5,trans,{w=0},"out-cubic",function()
 
         end)
     end)
@@ -184,6 +239,9 @@ function player:update(dt,scene)
 
         if col.other.isSpike or (col.other.properties and col.other.properties.death) then
             self:kill()
+        end
+        if col.other.properties and col.other.properties.levelEnd then
+            self:nextLevel()
         end
     end
     if input:pressed("jump") and self.jumps > 1 then

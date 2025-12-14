@@ -24,6 +24,11 @@ function rect(f,x,y,w,h)
     end
 end
 
+function cprint(t,x,y)
+    local w=font:getWidth(t)/2
+    lg.print(t,x,y,0,1,1,w,font:getHeight()/2)
+end
+
 function beginDraw()
     shove.beginDraw()
     shove.beginLayer("game")

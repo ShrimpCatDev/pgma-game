@@ -66,7 +66,7 @@ function lvl:load()
     self.bgm:play()
     self.talkSound=love.audio.newSource("assets/sfx/talk.wav","static")
     self.talkSound:stop()
-    trans={x=0,y=0,w=0,h=conf.gH}
+    trans={x=0,y=0,w=0,h=conf.gH,ty=-8,txt="level complete!"}
     frozen=false
 end
 
@@ -182,6 +182,7 @@ function lvl:draw()
         lg.setColor(0,0,0,1)
         lg.rectangle("fill",trans.x,trans.y,trans.w,trans.h)
         lg.setColor(1,1,1,1)
+        cprint(trans.txt,conf.gW/2,trans.ty)
     endDraw()
 end
 
