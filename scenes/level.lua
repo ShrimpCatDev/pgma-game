@@ -2,8 +2,8 @@ local lvl = {}
 
 levelStats={
     "double jump",
-    "flip gravity",
     "glide",
+    "flip gravity",
     "sprint"
     --etc...
 }

@@ -106,10 +106,6 @@ function player:update(dt,scene)
         self.gravM = -self.gravM
     end
 
-    if input:pressed("djump") then
-        self.doubleJump = not self.doubleJump
-    end
-
     if input:pressed("kill") then
         self:kill()
     end
@@ -120,7 +116,7 @@ function player:update(dt,scene)
         max = self.runSpeed
     end
 
-    if input:down("glide") and not self.isGrounded then
+    if input:down("glide") and not self.isGrounded and self.power=="glide" then
         if self.gravM > 0 then
             self.gravM = 0.2
         else
@@ -159,7 +155,11 @@ function player:update(dt,scene)
             if math.abs(self.vy) < 50 then
                 self.vy = 0
                 self.isGrounded = true
-                self.jumps = self.doubleJump and self.maxJumps or 1
+                if self.doubleJump then
+                    self.jumps = self.jumps
+                else
+                    self.jumps = 2
+                end
             else
                 self.vy = self.vy * 0.1
             end
@@ -188,7 +188,6 @@ function player:update(dt,scene)
         self.jumpSound:stop()
         self.jumpSound:play()
     end
-    print(self.isGrounded)
 
     if self.isGrounded then
         if moved then
