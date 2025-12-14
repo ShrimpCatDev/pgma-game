@@ -40,9 +40,13 @@ function lvl:load()
     local b = require("class/bot")
     local s = require("class/spike")
 
-
-    player = p(20, 70)
-    bot = b(100, 70)
+    for k,v in pairs(map.layers.spawn.objects) do
+        if v.properties.spawn=="player" then
+            player = p(v.x, v.y)
+        else
+            bot = b(v.x, v.y)
+        end
+    end
     -- spike = s(150, 70)
 
     TIME = 0

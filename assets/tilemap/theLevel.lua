@@ -9,8 +9,8 @@ return {
   height = 20,
   tilewidth = 16,
   tileheight = 16,
-  nextlayerid = 10,
-  nextobjectid = 25,
+  nextlayerid = 12,
+  nextobjectid = 27,
   properties = {},
   tilesets = {
     {
@@ -791,6 +791,52 @@ return {
           visible = true,
           properties = {
             ["platform"] = true
+          }
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 11,
+      name = "spawn",
+      class = "",
+      visible = false,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
+        {
+          id = 25,
+          name = "",
+          type = "",
+          shape = "point",
+          x = 56.5455,
+          y = 232.909,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["spawn"] = "player"
+          }
+        },
+        {
+          id = 26,
+          name = "",
+          type = "",
+          shape = "point",
+          x = 123.455,
+          y = 239.818,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["spawn"] = "bot"
           }
         }
       }
