@@ -57,22 +57,29 @@ local function round(num)
 end
 
 function player:kill()
-    self.gravM = 1
-    self.direction = 1
-    self.x = self.spawnX
-    self.y = self.spawnY
-    self.vx = 0
-    self.vy = 0
+    frozen=true
+    timer.tween(0.5,trans,{w=conf.gW},"in-cubic",function()
+        self.gravM = 1
+        self.direction = 1
+        self.x = self.spawnX
+        self.y = self.spawnY
+        self.vx = 0
+        self.vy = 0
 
-    if world.update then
-        world:update(self, self.x, self.y, self.w, self.h)
-    else
-        world:remove(self)
-        world:add(self, self.x, self.y, self.w, self.h)
-    end
+        if world.update then
+            world:update(self, self.x, self.y, self.w, self.h)
+        else
+            world:remove(self)
+            world:add(self, self.x, self.y, self.w, self.h)
+        end
 
-    self.col = {}
-    self.len = 0
+        self.col = {}
+        self.len = 0
+        frozen=false
+        timer.tween(0.5,trans,{w=0},"in-cubic",function()
+
+        end)
+    end)
 end
 
 function player:update(dt,scene)

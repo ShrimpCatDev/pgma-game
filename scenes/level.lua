@@ -66,70 +66,73 @@ function lvl:load()
     self.bgm:play()
     self.talkSound=love.audio.newSource("assets/sfx/talk.wav","static")
     self.talkSound:stop()
-    
+    trans={x=0,y=0,w=0,h=conf.gH}
+    frozen=false
 end
 
 function lvl:update(dt)
-    map:update(dt)
-    bot:update(dt)
-    if not talkies.isOpen() then
-        
-        player:update(dt, lvl)
-        local mapBottom = map.height * map.tileheight
-        local mapTop = 0
+    if not frozen then
+        map:update(dt)
+        bot:update(dt)
+        if not talkies.isOpen() then
+            
+            player:update(dt, lvl)
+            local mapBottom = map.height * map.tileheight
+            local mapTop = 0
 
-        if player.y > mapBottom + 50 or player.y < mapTop - 50 then
-            player:kill()
+            if player.y > mapBottom + 50 or player.y < mapTop - 50 then
+                player:kill()
+            end
+            -- spike:update(dt)
+            
+
+            local dx = (player.x + player.w / 2) - (bot.x + bot.w / 2)
+            local dy = (player.y + player.h / 2) - (bot.y + bot.h / 2)
+            local dist = math.sqrt(dx * dx + dy * dy)
+
+            local d=15
+
+            if dist < d and not talkies.isOpen() and not self.nearBot and input:pressed("action") then
+                self.nearBot = true
+                player.anim.current=player.anim.idle
+                self.talkSound:stop()
+                self.talkSound:play()
+                bot.vy=-150
+                talkies.say("bot", "hey there traveler! welcome.")
+                talkies.say("bot", "the world is dangerous beyond this point.")
+                talkies.say("bot", "everything just seems so familiar")
+                talkies.say("bot", "hmmm, anyways")
+                talkies.say("bot", "use your "..currentStatDialouge.." wisely.")
+                talkies.say("bot", levelMsg[level])
+                if firstTalk then talkies.say("bot", "by the way, you can use x to sprint.") end
+                firstTalk=false
+            end
+
+            if dist<d then
+                self.canTalk=true
+            end
+
+            if dist >= d then
+                self.nearBot = false
+                self.canTalk=false
+            end
+            camera.x = (player.x + player.w / 2) - conf.gW / 2
+            camera.y = (player.y + player.h / 2) - conf.gH / 2
+
+            camera.x = clamp(camera.x, 0, map.width * map.tilewidth - conf.gW)
+            camera.y = clamp(camera.y, 0, map.height * map.tileheight - conf.gH)
+        else
+            if input:pressed("action") then
+                talkies.onAction()
+            elseif input:pressed("up") then
+                talkies.prevOption()
+            elseif input:pressed("down") then
+                talkies.nextOption()
+            end
         end
-        -- spike:update(dt)
-        
-
-        local dx = (player.x + player.w / 2) - (bot.x + bot.w / 2)
-        local dy = (player.y + player.h / 2) - (bot.y + bot.h / 2)
-        local dist = math.sqrt(dx * dx + dy * dy)
-
-        local d=15
-
-        if dist < d and not talkies.isOpen() and not self.nearBot and input:pressed("action") then
-            self.nearBot = true
-            player.anim.current=player.anim.idle
-            self.talkSound:stop()
-            self.talkSound:play()
-            bot.vy=-150
-            talkies.say("bot", "hey there traveler! welcome.")
-            talkies.say("bot", "the world is dangerous beyond this point.")
-            talkies.say("bot", "everything just seems so familiar")
-            talkies.say("bot", "hmmm, anyways")
-            talkies.say("bot", "use your "..currentStatDialouge.." wisely.")
-            talkies.say("bot", levelMsg[level])
-            if firstTalk then talkies.say("bot", "by the way, you can use x to sprint.") end
-            firstTalk=false
-        end
-
-        if dist<d then
-            self.canTalk=true
-        end
-
-        if dist >= d then
-            self.nearBot = false
-            self.canTalk=false
-        end
-        camera.x = (player.x + player.w / 2) - conf.gW / 2
-        camera.y = (player.y + player.h / 2) - conf.gH / 2
-
-        camera.x = clamp(camera.x, 0, map.width * map.tilewidth - conf.gW)
-        camera.y = clamp(camera.y, 0, map.height * map.tileheight - conf.gH)
-    else
-        if input:pressed("action") then
-            talkies.onAction()
-        elseif input:pressed("up") then
-            talkies.prevOption()
-        elseif input:pressed("down") then
-            talkies.nextOption()
-        end
+        player.anim.current:update(dt)
+        bot.anim.idle:update(dt)
     end
-    player.anim.current:update(dt)
-    bot.anim.idle:update(dt)
     self.fade:update(dt)
 end
 
@@ -176,6 +179,9 @@ function lvl:draw()
         lg.draw(self.canvas,conf.gW/2,conf.gH/2,0,1,1,conf.gW/2,conf.gH/2)
         talkies.draw()
         self.fade:draw()
+        lg.setColor(0,0,0,1)
+        lg.rectangle("fill",trans.x,trans.y,trans.w,trans.h)
+        lg.setColor(1,1,1,1)
     endDraw()
 end
 
