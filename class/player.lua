@@ -12,6 +12,8 @@ local function sign(n)
 end
 
 function player:new(x, y)
+    self.jumpSound=love.audio.newSource("assets/sfx/jump.wav","static")
+    self.jumpSound:stop()
     player.super.new(self, x, y, 12, 16)
 
     self.spawnX = x
@@ -183,6 +185,8 @@ function player:update(dt,scene)
             self:spawnShockwave(self.x + self.w / 2, self.y + self.h, false)
         end
         self.jumps = self.jumps - 1
+        self.jumpSound:stop()
+        self.jumpSound:play()
     end
     print(self.isGrounded)
 

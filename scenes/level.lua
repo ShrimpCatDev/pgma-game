@@ -46,16 +46,21 @@ function lvl:load()
     talkies.rounding = 2
     talkies.titleBackgroundColor = color("#2745fe")
     talkies.messageBackgroundColor = color("#000000")
+    local blip=love.audio.newSource("assets/sfx/blip.wav", "static")
+    talkies.talkSound = blip
 
     
     currentStatDialouge=levelStats[level]
 
     self.canTalk=false
     self.bgm:play()
+    self.talkSound=love.audio.newSource("assets/sfx/talk.wav","static")
+    self.talkSound:stop()
 end
 
 function lvl:update(dt)
     map:update(dt)
+    bot:update(dt)
     if not talkies.isOpen() then
         
         player:update(dt, lvl)
@@ -66,7 +71,7 @@ function lvl:update(dt)
             player:kill()
         end
         -- spike:update(dt)
-        bot:update(dt)
+        
 
         local dx = (player.x + player.w / 2) - (bot.x + bot.w / 2)
         local dy = (player.y + player.h / 2) - (bot.y + bot.h / 2)
@@ -77,6 +82,9 @@ function lvl:update(dt)
         if dist < d and not talkies.isOpen() and not self.nearBot and input:pressed("action") then
             self.nearBot = true
             player.anim.current=player.anim.idle
+            self.talkSound:stop()
+            self.talkSound:play()
+            bot.vy=-150
             talkies.say("bot", "hey there traveler! welcome.")
             talkies.say("bot", "the world is dangerous beyond this point.")
             talkies.say("bot", "everything just seems so familiar")
