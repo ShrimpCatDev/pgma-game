@@ -156,7 +156,7 @@ function player:update(dt,scene)
                 self.vy = 0
                 self.isGrounded = true
                 if self.doubleJump then
-                    self.jumps = self.jumps
+                    self.jumps = 3
                 else
                     self.jumps = 2
                 end

@@ -4,9 +4,14 @@ levelStats={
     "double jump",
     "glide",
     "flip gravity",
-    "sprint"
-    --etc...
 }
+
+levelMsg={
+    "press z while in the air to use it",
+    "press c or lctrl to use it",
+    "press z to use it"
+}
+local firstTalk=true
 
 function lvl:load()
     self.bgm=music.level
@@ -56,6 +61,7 @@ function lvl:load()
     self.bgm:play()
     self.talkSound=love.audio.newSource("assets/sfx/talk.wav","static")
     self.talkSound:stop()
+    
 end
 
 function lvl:update(dt)
@@ -90,6 +96,9 @@ function lvl:update(dt)
             talkies.say("bot", "everything just seems so familiar")
             talkies.say("bot", "hmmm, anyways")
             talkies.say("bot", "use your "..currentStatDialouge.." wisely.")
+            talkies.say("bot", levelMsg[level])
+            if firstTalk then talkies.say("bot", "by the way, you can use x to sprint.") end
+            firstTalk=false
         end
 
         if dist<d then
