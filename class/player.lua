@@ -102,6 +102,10 @@ function player:update(dt,scene)
         end
     end
 
+    if input:pressed("glide") and self.power=="flip gravity" then
+        self.gravM = -self.gravM
+    end
+
     if input:pressed("kill") then
         self:kill()
     end
@@ -175,20 +179,14 @@ function player:update(dt,scene)
             self:kill()
         end
     end
-    if input:pressed("jump") then
-        if self.power~="flip gravity" then
-            if self.jumps > 1 then
-                self.vy = -250 * self.gravM
-                if not self.isGrounded then
-                    self:spawnShockwave(self.x + self.w / 2, self.y + self.h, false)
-                end
-                self.jumps = self.jumps - 1
-                self.jumpSound:stop()
-                self.jumpSound:play()
-            end
-        else
-            self.gravM = -self.gravM
+    if input:pressed("jump") and self.jumps > 1 then
+        self.vy = -250 * self.gravM
+        if not self.isGrounded then
+            self:spawnShockwave(self.x + self.w / 2, self.y + self.h, false)
         end
+        self.jumps = self.jumps - 1
+        self.jumpSound:stop()
+        self.jumpSound:play()
     end
 
     if self.isGrounded then

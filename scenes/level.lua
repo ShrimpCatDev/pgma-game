@@ -129,6 +129,16 @@ function lvl:update(dt)
     self.fade:update(dt)
 end
 
+local function sign(n)
+    if n < 0 then
+        return -1
+    elseif n > 0 then
+        return 1
+    else
+        return 0
+    end
+end
+
 function lvl:draw()
     lg.setCanvas(self.canvas)
         lg.push()
@@ -156,9 +166,10 @@ function lvl:draw()
         lg.translate(0, 0)
         lg.pop()
     lg.setCanvas()
-    
+
     beginDraw()
-        lg.draw(self.canvas)
+        --local f=sign(player.gravM)
+        lg.draw(self.canvas,conf.gW/2,conf.gH/2,0,1,1,conf.gW/2,conf.gH/2)
         talkies.draw()
         self.fade:draw()
     endDraw()

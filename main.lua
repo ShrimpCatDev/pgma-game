@@ -27,7 +27,7 @@ function love.load()
 
     sound={}
 
-    level=1
+    level=3
     timer=require("lib/hump/timer")
     local sceneryInit=require("lib/scenery")
     scenery=sceneryInit("level","scenes")
