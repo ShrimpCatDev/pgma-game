@@ -14,6 +14,7 @@ levelMsg={
 local firstTalk=true
 
 function lvl:load()
+    self.canvas=lg.newCanvas(conf.gW,conf.gH)
     self.bgm=music.level
     self.bgm:setLooping(true)
     self.bgm:play()
@@ -129,33 +130,37 @@ function lvl:update(dt)
 end
 
 function lvl:draw()
+    lg.setCanvas(self.canvas)
+        lg.push()
+        lg.translate(math.floor(-camera.x), math.floor(-camera.y))
+        map:draw(-camera.x, -camera.y)
+        bot:draw()
+        -- spike:draw()
+        player:draw()
+        lg.setColor(1, 1, 1)
+        --[[lg.print("double jump: " .. tostring(player.doubleJump) .. "\ninverted grav: " .. player.gravM,
+            math.floor(player.x - 40), math.floor(player.y - 40))]]
+        if self.canTalk then
+            local msg="x: talk"
+            lg.setColor(0,0,0,1)
+
+            local x,y=math.ceil(player.x),math.ceil(player.y)
+
+            lg.print(msg,x+player.w/2-(font:getWidth(msg)/2)+1,y-8)
+            lg.print(msg,x+player.w/2-(font:getWidth(msg)/2)-1,y-8)
+            lg.print(msg,x+player.w/2-(font:getWidth(msg)/2),y-8+1)
+            lg.print(msg,x+player.w/2-(font:getWidth(msg)/2),y-8-1)
+            lg.setColor(1,1,1,1)
+            lg.print(msg,x+player.w/2-(font:getWidth(msg)/2),y-8)
+        end
+        lg.translate(0, 0)
+        lg.pop()
+    lg.setCanvas()
+    
     beginDraw()
-    lg.push()
-    lg.translate(math.floor(-camera.x), math.floor(-camera.y))
-    map:draw(-camera.x, -camera.y)
-    bot:draw()
-    -- spike:draw()
-    player:draw()
-    lg.setColor(1, 1, 1)
-    --[[lg.print("double jump: " .. tostring(player.doubleJump) .. "\ninverted grav: " .. player.gravM,
-        math.floor(player.x - 40), math.floor(player.y - 40))]]
-    if self.canTalk then
-        local msg="x: talk"
-        lg.setColor(0,0,0,1)
-
-        local x,y=math.ceil(player.x),math.ceil(player.y)
-
-        lg.print(msg,x+player.w/2-(font:getWidth(msg)/2)+1,y-8)
-        lg.print(msg,x+player.w/2-(font:getWidth(msg)/2)-1,y-8)
-        lg.print(msg,x+player.w/2-(font:getWidth(msg)/2),y-8+1)
-        lg.print(msg,x+player.w/2-(font:getWidth(msg)/2),y-8-1)
-        lg.setColor(1,1,1,1)
-        lg.print(msg,x+player.w/2-(font:getWidth(msg)/2),y-8)
-    end
-    lg.translate(0, 0)
-    lg.pop()
-    talkies.draw()
-    self.fade:draw()
+        lg.draw(self.canvas)
+        talkies.draw()
+        self.fade:draw()
     endDraw()
 end
 
