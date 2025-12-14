@@ -84,6 +84,7 @@ function player:nextLevel()
                 timer.tween(0.5,trans,{ty=conf.gH/2},"out-cubic")
             end)
         else
+            currentStatDialouge=levelStats[level]
             self.gravM = 1
             self.direction = 1
             self.x = self.spawnX

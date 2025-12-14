@@ -9,7 +9,7 @@ levelStats={
 levelMsg={
     "press z while in the air to use it",
     "press c or lctrl to use it",
-    "press z to use it"
+    "press c or lctrl to use it"
 }
 local firstTalk=true
 
@@ -183,6 +183,12 @@ function lvl:draw()
         lg.rectangle("fill",trans.x,trans.y,trans.w,trans.h)
         lg.setColor(1,1,1,1)
         cprint(trans.txt,conf.gW/2,trans.ty)
+        lg.setColor(0,0,0,1)
+        lg.rectangle("fill",0,0,conf.gW,font:getHeight()+1)
+        lg.setColor(1,1,1,1)
+        lg.print("level "..level,1,1)
+        local t=currentStatDialouge
+        lg.print(t,conf.gW-1,1,0,1,1,font:getWidth(t),0)
     endDraw()
 end
 
